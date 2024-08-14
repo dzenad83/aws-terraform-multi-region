@@ -1,0 +1,49 @@
+# Local .terraform directories
+**/.terraform/*
+
+# Terraform State files
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+
+# Exclude override files as they are usually used to override resources locally and should not be shared
+*.tfvars
+*.tfvars.json
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Ignore core Terraform files
+.terraformrc
+terraform.rc
+
+# Include .env files if they are used for environment variables but be cautious with sensitive information
+.env
+
+# Ignore any CLI-driven temporary files
+*.tfplan
+*.tfapply
+
+# Ignore the lock file for provider plugins unless you want to commit it
+.terraform.lock.hcl
+
+# Exclude sensitive information (if any)
+.secret
+*.key
+*.pem
+*.pfx
+*.cer
+
+# Exclude backup files created by the editor or IDE
+*.backup
+*.bak
+
+# Ignore logs and temp files
+*.log
+*.tmp
+
+# Ignore Macfiles
+.DS_Store
