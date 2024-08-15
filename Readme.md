@@ -108,5 +108,8 @@ git push origin test
 ```
 
 8. Terraform Apply
-   Login to Terraform Cloud UI with your Github Account: https://app.terraform.io/app/Power-Diary/workspaces
-   Whatch how your changes are planned. If the plan was successfull, click `See Details` and review everything before scrolling to the end and clicking `Confirm & Apply`.
+
+```
+Login to Terraform Cloud UI with your Github Account: https://app.terraform.io/app/Power-Diary/workspaces
+Whatch how your changes are planned. If the plan was successfull, click `See Details` and review everything before scrolling to the end and clicking `Confirm & Apply`.
+```
