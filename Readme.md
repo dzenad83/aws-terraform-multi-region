@@ -1,10 +1,10 @@
 # Power Diary Assignment
 
-### Infrastructure Diagram
+## Infrastructure Diagram
 
 <img src="images/pda-infrastructure.jpg" alt="Alt text" height="500">
 
-### Understanding Repository Structure
+## Understanding Repository Structure
 
 Since the assignment is about creating two environments in three different regions (total 6), I assumed that I should demonstrate how this small project could function within a larger ecosystem. Therefore, I laid out a complete folder structure to support this. For this approach, Terraform Cloud and Terragrunt would be most suitable. I chose Terraform Cloud because it provides a complete UI experience. Even though Terragrunt has it's own benefits and advantages.
 
@@ -33,7 +33,9 @@ The folder `/modules/` contains custom made modules that can be reused in all en
 In order to be able to run `terraform init` and `terraform plan` locally you need to login and connect to Terraform Cloud via CLI.
 To accomplish that, in your command prompt run `terraform login` and follow the procedure: https://developer.hashicorp.com/terraform/tutorials/cloud-get-started/cloud-login
 
-### Initializing Terraform
+## Pre-Requirements
+
+### Terraform Version
 
 Pre-condition for this project to run is to use have terraform version `1.9.3` or later installed on your system.
 To check your version simply type `terraform -version`
@@ -47,16 +49,60 @@ It is important to notice that in this repository we have 6 environments and eac
 To be able to initilize terraform and make changes in the AWS region "ap-southeast-2" specifically on the testing environment, change directory into `/environments/ap-southeast-2/test` and execute `terraform init`
 Note, for this terraform workspace to initilize on your system, you do not require AWS credentials, your access should be authorized by your Github credentials in Terraform Cloud.
 Therefore it is required that your Github Account is associated with the Terraform Workspace. Terraform Cloud will use a service account user to authenticate to AWS directly.
+To get access to the Terraform Cloud Project, please send me your email associated with your Github Account to dzenad.custovic@hotmail.com
 
-### Terraform Plan and Apply
+## How it works
 
 Once you have been logged in and authorized, you can perform terraform plans from local console, but `terraform apply` is not allowed. It is only possible to be executed through the web console in the Terraform Cloud UI: https://app.terraform.io/app/Power-Diary/workspaces
 
-### How to make changes
+### How to contribute / make changes
 
-To make a change create a feature branch on Github from the test branch. Developers are allowed to make feature branches and once ready, you can create a Merge Request to the test branch. All changes in this phase should be done in the `/environments/ap-southeast-2/test`folder.
-Once that has been created, every push to the feature branch will trigger a terraform plan that can be observed in the Merge request itself, as well as in the Terraform Cloud Console.
+1. Login to Terraform Clooud
 
-Since the testing environment is completly decoupled from the production environment, we would have to apply the changes in the production folder by adding the changes manually in the `/environments/ap-southeast-2/prod` folder.
+```
+terraform login                     # Follow the described procedure for Terraform Login
+```
 
-There are different folders to keep the state, changes, and terraform maintenance clean. And to be able to deploy different infrastructures accross environments since there might be infrastructure in one environment, that is not required in another. For example we need EC2 instances with more CPU in one region, or we need want to start testing a new API Endpoint in one region, while that is not happening in another. Etc.
+2. Change directory to desired environment.
+
+```
+# Assuming the desired environment is testing in the us-east-1 region
+
+cd environments/us-east-1/test
+terraform init                      # To initialize terraform state
+terraform plan                      # To run terraform plan and see if there are any changes
+```
+
+3. Change to 'test' branch to start working
+
+```
+git fetch --all -prune
+git checkout test
+```
+
+4. Make required changes in terraform, verify with `terraform validate` and `terraform plan`
+
+5. Commit changes to 'test' branch. Keep in mind that all test environments are deployed from 'test' branch.
+
+6. To deploy to any production environment you must commit changes to 'test branch and then create a Pull Request to 'main' branch.
+
+```
+# Assuming the desired production environment is in us-east-1 region.
+
+cd environments/us-east-1/prod
+git add .
+git commit -m "Commit message"
+git push origin test
+
+```
+
+After pushing changes to 'test' branch, create a Pull Request in Github UI
+
+```
+1. Go to the repository page: Navigate to your repository on GitHub.
+2. Switch to the test branch: You should see a prompt to create a pull request since you just pushed changes to test.
+3. Click on "Compare & pull request".
+4. Set the target branch: Ensure the base branch is main and the compare branch is test.
+5. Add details: Provide a title and description for your pull request, explaining what changes you are proposing.
+6. Submit: Click "Create Pull Request" or "Submit" to create the pull request.
+```
