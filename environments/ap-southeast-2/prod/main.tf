@@ -1,5 +1,5 @@
 
-# VPC Module -------------------------
+# VPC Module
 
 # The VPC Module is a good example why to separate states of different environments. For example, this VPC has a NAT Gateway in each AZ
 # While the VPC in a TEST environment does not require such high availability / fault tolerance !
@@ -8,15 +8,15 @@ module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
 
   name = "${var.region}-${var.env}"
-  cidr = "10.5.0.0/16"
+  cidr = "10.6.0.0/16"
 
   azs             = ["ap-southeast-2a", "ap-southeast-2b", "ap-southeast-2c"]
-  private_subnets = ["10.5.1.0/24", "10.5.2.0/24", "10.5.3.0/24"]
-  public_subnets  = ["10.5.101.0/24", "10.5.102.0/24", "10.5.103.0/24"]
+  private_subnets = ["10.6.1.0/24", "10.6.2.0/24", "10.6.3.0/24"]
+  public_subnets  = ["10.6.101.0/24", "10.6.102.0/24", "10.6.103.0/24"]
 
   enable_nat_gateway = true
-  single_nat_gateway = true
-  one_nat_gateway_per_az = false
+  single_nat_gateway = false
+  one_nat_gateway_per_az = true
 
   enable_vpn_gateway = false
 

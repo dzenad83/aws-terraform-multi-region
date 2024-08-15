@@ -14,7 +14,7 @@ variable "AWS_SECRET_ACCESS_KEY" {
 # ---------------------------
 # EC2 variables
 variable "windows_ami_ids" {
-  description = "Map of Windows Server versions to AMI IDs"
+  description = "Map of Windows Server versions to AMI IDs for N.Virginia Region"
   type        = map(string)
   default     = {
     "windows2019" = "ami-016a78934c9cfa396" 

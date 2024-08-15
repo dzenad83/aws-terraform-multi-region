@@ -33,7 +33,7 @@ resource "aws_s3_bucket_policy" "this" {
       {
         Effect    = "Allow"
         Principal = {
-          AWS = aws_iam_role.ec2_instance_role.arn
+          AWS = var.ec2_instance_role_arn
         }
         Action    = [
           "s3:GetObject",
