@@ -2,7 +2,7 @@ resource "aws_s3_bucket" "this" {
   bucket = var.bucket_name
 }
   # Server-Side Encryption with Amazon S3-Managed Keys (SSE-S3)
-  resource "aws_s3_bucket_server_side_encryption_configuration" "example" {
+  resource "aws_s3_bucket_server_side_encryption_configuration" "this" {
   bucket = aws_s3_bucket.this.id
 
   rule {
@@ -13,7 +13,7 @@ resource "aws_s3_bucket" "this" {
 }
 
 # Block public access
-resource "aws_s3_bucket_public_access_block" "example" {
+resource "aws_s3_bucket_public_access_block" "this" {
   bucket = aws_s3_bucket.this.id
 
   block_public_acls       = true
