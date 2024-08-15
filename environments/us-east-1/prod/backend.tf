@@ -1,8 +1,22 @@
 terraform {
-  backend "s3" {
-    bucket         = "pd-terraform-state-backend"
-    key            = "us-east-1/prod/terraform.tfstate"
-    region         = "us-east-1"
-    dynamodb_table = "pd-terraform-state"
+  backend "remote" {
+    hostname     = "app.terraform.io"
+    organization = "Power-Diary"
+
+    workspaces {
+      prefix = "pda-"
+    }
   }
+
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.62.0"
+    }
+  }
+  required_version = "~> 1.9.3"
+}
+
+provider "aws" {
+  region = "us-east-1"
 }

@@ -8,11 +8,11 @@ module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
 
   name = "${var.region}-${var.env}"
-  cidr = "10.5.0.0/16"
+  cidr = "10.3.0.0/16"
 
-  azs             = ["ap-southeast-2a", "ap-southeast-2b", "ap-southeast-2c"]
-  private_subnets = ["10.5.1.0/24", "10.5.2.0/24", "10.5.3.0/24"]
-  public_subnets  = ["10.5.101.0/24", "10.5.102.0/24", "10.5.103.0/24"]
+  azs             = ["eu-west-1a", "eu-westt-1b", "eu-west-1c"]
+  private_subnets = ["10.3.1.0/24", "10.3.2.0/24", "10.3.3.0/24"]
+  public_subnets  = ["10.3.101.0/24", "10.3.102.0/24", "10.3.103.0/24"]
 
   enable_nat_gateway = true
   single_nat_gateway = true
