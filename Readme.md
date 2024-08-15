@@ -84,7 +84,7 @@ git checkout test
 
 5. Commit changes to 'test' branch. Keep in mind that all test environments are deployed from 'test' branch.
 
-6. To deploy to any production environment you must commit changes to 'test branch and then create a Pull Request to 'main' branch.
+6. To deploy to any production environment you must commit changes to 'test' branch and then create a Pull Request to 'main' branch.
 
 ```
 # Assuming the desired production environment is in us-east-1 region.
@@ -96,7 +96,7 @@ git push origin test
 
 ```
 
-After pushing changes to 'test' branch, create a Pull Request in Github UI
+7. After pushing changes to 'test' branch, create a Pull Request in Github UI
 
 ```
 1. Go to the repository page: Navigate to your repository on GitHub.
@@ -106,3 +106,7 @@ After pushing changes to 'test' branch, create a Pull Request in Github UI
 5. Add details: Provide a title and description for your pull request, explaining what changes you are proposing.
 6. Submit: Click "Create Pull Request" or "Submit" to create the pull request.
 ```
+
+8. Terraform Apply
+   Login to Terraform Cloud UI with your Github Account: https://app.terraform.io/app/Power-Diary/workspaces
+   Whatch how your changes are planned. If the plan was successfull, click `See Details` and review everything before scrolling to the end and clicking `Confirm & Apply`.
