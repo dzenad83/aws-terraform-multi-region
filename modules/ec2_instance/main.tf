@@ -14,6 +14,11 @@ resource "aws_instance" "webserver" {
   associate_public_ip_address = false
   iam_instance_profile = aws_iam_instance_profile.webserver_instance_profile.name
 
+  root_block_device {
+    volume_size = 10 
+    encrypted = true
+  }
+
   user_data = length(var.user_data_file_path) > 0 ? file(var.user_data_file_path) : null
 
 }
