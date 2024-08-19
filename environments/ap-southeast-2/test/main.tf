@@ -14,8 +14,8 @@ module "vpc" {
   private_subnets = ["10.5.1.0/24", "10.5.2.0/24", "10.5.3.0/24"]
   public_subnets  = ["10.5.101.0/24", "10.5.102.0/24", "10.5.103.0/24"]
 
-  enable_nat_gateway = true
-  single_nat_gateway = true
+  enable_nat_gateway = false
+  single_nat_gateway = false
   one_nat_gateway_per_az = false
 
   enable_vpn_gateway = false
