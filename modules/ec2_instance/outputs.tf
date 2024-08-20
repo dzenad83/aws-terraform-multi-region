@@ -12,3 +12,7 @@ output "instance_id" {
   description = "The Instance ID for ex. i-23492380sdfsdfsdf"
   value = aws_instance.webserver.id
 }
+output "instance_role" {
+  description = "The IAM Role ARN of the EC2 instance"
+ value = aws_iam_role.ec2_instance_role
+}

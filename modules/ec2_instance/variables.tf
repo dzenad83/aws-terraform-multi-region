@@ -12,13 +12,11 @@ variable "user_data_file_path" {
   type        = string
   default     = ""  # Default empty string if no file is provided
 }
-variable "webserver_role" {
-  description = "Path to the user data script file"
-  type        = string
-  default     = ""  # Default empty string if no role is provided
+
+variable "security_group" {
+  type =list(string)
 }
 
-variable "alb_security_group" {
-  type =list(string)
-  default = [ "0.0.0.0/0" ]
+variable "instance_name" {
+  type = string
 }
