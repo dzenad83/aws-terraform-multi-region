@@ -1,9 +1,6 @@
 
 # VPC Module -------------------------
 
-# The VPC Module is a good example why to separate states of different environments. For example, this VPC has a NAT Gateway in each AZ
-# While the VPC in a TEST environment does not require such high availability / fault tolerance !
-
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
 
@@ -26,62 +23,8 @@ module "vpc" {
 
 }
 
-# EC2 Instance -------------------------
-
-data "aws_iam_role" "ec2_instance_role" {
-  name = "ec2_s3_access_role"
-}
-
-module "ec2_instance" {
-  source = "../../../modules/ec2_instance"
-
-    ami_id = var.windows_ami_ids["windows2022"]
-    instance_type = "t2.micro"
-    private_subnet = module.vpc.private_subnets[0]
-    user_data_file_path = "${path.module}/launchscript.ps1"
-    webserver_role = data.aws_iam_role.ec2_instance_role.name
-    alb_security_group = [aws_security_group.alb.id]
-
-    depends_on = [ aws_security_group.alb ]
-}
-
 # Application Load Balancer -------------------------
 
-# For the Application Load Balancer we need a Security Group, but to avoid circular dependencies with the EC2 instance, I will create the SG here.
-# In the lines above, the EC2 requires a security group to be provided for secure access between the ALB and the EC2
-
-# Security Group for ALB
-resource "aws_security_group" "alb" {
-  name        = "${var.region}-${var.env}-alb"
-  description = "Security Group for Application Load Balancer"
-
-  ingress {
-    description = "HTTPS"
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  ingress {
-    description = "HTTP"
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = [module.vpc.vpc_cidr_block]
-  }
-
-  tags = {
-    Name = "${var.region}-${var.env}-alb"
-  }
-}
-
-# ALB Module
 module "alb" {
   source = "../../../modules/alb"
 
@@ -93,4 +36,34 @@ module "alb" {
   certificate_arn = "arn:aws:acm:us-east-1:988015658873:certificate/e6ad9d75-356c-44cb-878b-6405402c1d0a"
   
   depends_on = [ module.ec2_instance, module.vpc ]
+}
+
+# EC2 Instance -------------------------
+
+data "aws_iam_role" "ec2_instance_role" {
+  name = "ec2_s3_access_role"
+}
+
+
+module "ec2_instance" {
+  source = "../../../modules/ec2_instance"
+
+    ami_id = var.windows_ami_ids["windows2022"]
+    instance_type = "t2.micro"
+    private_subnet = module.vpc.private_subnets[0]
+    user_data_file_path = "${path.module}/launchscript.ps1"
+    security_group = [aws_security_group.alb.id]
+    instance_name = "${var.region}-${var.env}-webserver"
+
+    depends_on = [ aws_security_group.alb ]
+}
+# S3 Bucket -------------------------
+
+module "s3_bucket" {
+  source  = "../../../modules/s3_bucket"
+
+  bucket_name = "${var.region}-${var.env}-bucket"
+  ec2_instance_role_arn = module.ec2_instance.instance_role.arn
+
+  depends_on = [ module.ec2_instance ]
 }

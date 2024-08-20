@@ -20,3 +20,9 @@ terraform {
 provider "aws" {
   region = "eu-west-2"
 }
+
+# Additional provider for S3 buckets with the specific region. This one is passed into the S3_Bucket module
+provider "aws" {
+  alias  = "us_east_1"
+  region = "us-east-1"
+}
