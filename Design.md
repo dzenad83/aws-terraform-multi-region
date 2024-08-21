@@ -21,7 +21,7 @@ environments/
     └── prod/
 ```
 
-The main.tf file serves as the root module for Terraform in every environment, so everything in the environment should start from there. Even though there are additional files in each environment that create resources such as security groups and IAM-related resources. These resources are defined here to avoid circular dependencies within the EC2 and S3 bucket modules.
+In every environment there is a main.tf file. The main.tf file serves as the root module for Terraform in every environment, so everything in the environment should start from there. Even though there are additional files in each environment that create resources such as security groups and IAM-related resources. These resources are defined here to avoid circular dependencies within the EC2 and S3 bucket modules.
 
 Regarding the AWS diagram, I illustrated what I understood from the assignment's text. This diagram essentially represents what I have created in the Terraform code. The Application Load Balancer (ALB) serves as the public endpoint, secured with a security group that allows traffic only on ports 80 and 443, with port 80 being redirected to 443. I used an SSL certificate that I had already created. Unfortunately, I didn’t have a domain to create a DNS record pointing to the Load Balancer, but that can be easily done. I would then use host-based or path-based routing to direct traffic to different targets. Since there was only one instance and I didn’t have the domain, the SSL certificate will show a warning. However, the intention was to demonstrate how the ALB should be configured and how SSL/TLS termination should be handled.
 
