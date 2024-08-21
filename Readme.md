@@ -25,7 +25,7 @@ environments/
     └── prod/
 ```
 
-Every environment will have it's own state! This is because we want to be able to do two things.
+Every environment will have it's own state! This is because we want to be able to customize the environments.
 The folder `/modules/` contains custom made modules that can be reused in all environments. For example, all environments could have the same EC2 Instance Configuration, therefore it can be custom defined once as a `/modules/ec2` and reused in all environments.
 
 ### Design decisions
