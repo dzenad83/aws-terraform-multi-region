@@ -1,4 +1,4 @@
-# MULTI-REGION MULTI-ENVIRONMENT INFRASTRUCTURE DEPLOYMENT
+# Multi Region Infrastructure Deployment
 
 ## Infrastructure Diagram
 
@@ -6,7 +6,7 @@
 
 ## Understanding Repository Structure
 
-Since the assignment is about creating two environments in three different regions (total 6), I assumed that I should demonstrate how this small project could function within a larger ecosystem. Therefore, I laid out a complete folder structure to support this. For this approach, Terraform Cloud and Terragrunt would be most suitable. I chose Terraform Cloud because it provides a complete UI experience. Even though Terragrunt has it's own benefits and advantages.
+In this Repository I got an assignment from a client to create two environments in three different regions (total 6), I assumed that I should demonstrate how this small project could function within a larger ecosystem. Therefore, I laid out a complete folder structure to support this. For this approach, Terraform Cloud and Terragrunt would be most suitable. I chose Terraform Cloud because it provides a complete UI experience. Even though Terragrunt has it's own benefits and advantages.
 
 ```
 
@@ -53,7 +53,6 @@ It is important to notice that in this repository we have 6 environments and eac
 To be able to initilize terraform and make changes in the AWS region "ap-southeast-2" specifically on the testing environment, change directory into `/environments/ap-southeast-2/test` and execute `terraform init`
 Note, for this terraform workspace to initilize on your system, you do not require AWS credentials, your access should be authorized by your Github credentials in Terraform Cloud.
 Therefore it is required that your Github Account is associated with the Terraform Workspace. Terraform Cloud will use a service account user to authenticate to AWS directly.
-To get access to the Terraform Cloud Project, please send me your email associated with your Github Account to dzenad.custovic@hotmail.com
 
 ## How it works
 
