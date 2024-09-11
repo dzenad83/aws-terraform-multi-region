@@ -1,5 +1,4 @@
-Power Diary Technical Assignment for DevOps Engineer Interview 
-
+MULTIREGION MULTIENVIRONMENT DEPLOYMENT 
 
 
 The Challenge: You are tasked to set up a basic AWS environment for a web application. The application will be deployed across three different regions (Australia (AU), United Kingdom (UK), and United States (US)) and should have 2 separate environments for Production and Testing in each of those regions.
@@ -32,23 +31,3 @@ S3 Bucket Creation:
 Create an S3 bucket in the US region per environment.
 
 The EC2 instances should have RW access only to this bucket. No other access should be allowed.
-
-
-
-Notes:
-
-Including some documentation, such as a Readme file, detailing how to run the code and explaining any design decision is encouraged.
-
-While the code needs to be deployable, you are not required to deploy anything to AWS. Important: Please do not incur any AWS expenses as Power Diary will not be responsible or compensate those.
-
-Following best practices in terms of architecture and security is critical for us. Ensure to follow them throughout the challenge.
-
-Ensure the repository is well-organized and follows best practices for directory structure and naming conventions.
-
-
-
-Submission:
-
-Push your code and documentation to a new GitHub repository (or similar). Ensure that the repository is public and can be accessed for evaluation.
-
-Please submit your solution to people@powerdiary.com when you're done.

@@ -40,9 +40,6 @@ module "alb" {
 
 # EC2 Instance -------------------------
 
-data "aws_iam_role" "ec2_instance_role" {
-  name = "ec2_s3_access_role"
-}
 
 module "ec2_instance" {
   source = "../../../modules/ec2_instance"

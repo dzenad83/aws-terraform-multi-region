@@ -1,8 +1,8 @@
-# Power Diary Assignment
+# MULTI-REGION MULTI-ENVIRONMENT INFRASTRUCTURE DEPLOYMENT
 
 ## Infrastructure Diagram
 
-<img src="images/pda-infrastructure.jpg" alt="Alt text" height="500">
+<img src="images/infrastructure.jpg" alt="Alt text" height="500">
 
 ## Understanding Repository Structure
 
@@ -57,7 +57,7 @@ To get access to the Terraform Cloud Project, please send me your email associat
 
 ## How it works
 
-Once you have been logged in and authorized, you can perform terraform plans from local console, but `terraform apply` is not allowed. It is only possible to be executed through the web console in the Terraform Cloud UI: https://app.terraform.io/app/Power-Diary/workspaces
+Once you have been logged in and authorized, you can perform terraform plans from local console, but `terraform apply` is not allowed. It is only possible to be executed through the web console in the Terraform Cloud UI: https://app.terraform.io/app/${PROJECT}/workspaces
 
 ### How to contribute / make changes
 
@@ -114,6 +114,6 @@ git push origin test
 8. Terraform Apply
 
 ```
-Login to Terraform Cloud UI with your Github Account: https://app.terraform.io/app/Power-Diary/workspaces
+Login to Terraform Cloud UI with your Github Account: https://app.terraform.io/app/${PROJECt}/workspaces
 Whatch how your changes are planned. If the plan was successfull, click `See Details` and review everything before scrolling to the end and clicking `Confirm & Apply`.
 ```

@@ -1,10 +1,10 @@
 terraform {
   backend "remote" {
     hostname     = "app.terraform.io"
-    organization = "Power-Diary"
+    organization = "${ORGANIZATION_NAME}"
 
     workspaces {
-      prefix = "pda-"
+      prefix = "${WORKSPACE_PREFIX}}a-"
     }
   }
 
